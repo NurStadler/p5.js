@@ -43,7 +43,7 @@ class ShapeCollection {
    * @for p5.ShapeCollection
    * @param {Object} [options] recording options.
    * @param {Boolean} [options.draw=false] whether to draw commands onto the
-   *                                       canvas in addition to being recorded.
+   *                                     canvas in addition to being recorded.
    * @beta
    */
   begin(options = {}) {
@@ -291,8 +291,8 @@ export function SVGExportAddon(p5, fn, lifecycles) {
 
       this._currentOpacity = alpha / 255;
 
-          return color.toString('#rrggbb');
-      }
+      return color.toString('#rrggbb');
+    }
 
     _applyStyle(el) {
       const state = this.currentState;
@@ -928,8 +928,7 @@ export function SVGExportAddon(p5, fn, lifecycles) {
         return;
       }
 
-      const [r, g, b, a] = node.color._getRGBA([255, 255, 255, 255]);
-      p.background(r, g, b, a);
+      p.background(node.color);
     }
 
     applyState(state) {
@@ -942,15 +941,13 @@ export function SVGExportAddon(p5, fn, lifecycles) {
       }
 
       if (state.fill) {
-        const [r, g, b, a] = state.fill._getRGBA([255, 255, 255, 255]);
-        p.fill(r, g, b, a);
+        p.fill(state.fill);
       } else {
         p.noFill();
       }
 
       if (state.stroke) {
-        const [r, g, b, a] = state.stroke._getRGBA([255, 255, 255, 255]);
-        p.stroke(r, g, b, a);
+        p.stroke(state.stroke);
       } else {
         p.noStroke();
       }
@@ -1109,10 +1106,10 @@ export function SVGExportAddon(p5, fn, lifecycles) {
    * @param {Function} callback a function containing the drawing instructions.
    * @param {Object} [options] recording options.
    * @param {Boolean} [options.draw=false] if `true`, the drawing commands will
-   *                                       be drawn onto the canvas in addition
-   *                                       to being recorded. If `false` (default),
-   *                                       they are only recorded silently without
-   *                                       rendering.
+   *                                     be drawn onto the canvas in addition
+   *                                     to being recorded. If `false` (default),
+   *                                     they are only recorded silently without
+   *                                     rendering.
    * @return {p5.ShapeCollection} the recorded shape.
    * @beta
    */
